@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новый отклик!</title>
+</head>
+<body>
+    <h2><a href="{{ link }}{{ post.get_absolute_url }}">Новый отклик</a>!</h2>
+    <p>  Получен новый отклик от {{sender}}. </p>
+    <p> {{text|truncatechars:50 }} </p>
+</body>
+</html>

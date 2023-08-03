@@ -1,0 +1,25 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Объявление
+{% endblock title %}
+
+{% block content %}
+<h1>{{ post }}</h1>
+
+<br>
+<h3>{{ post.text | safe }}</h3>
+<h3>Автор: {{ post.author }}</h3>
+<h4>{{ post.time_created|date:'d M Y' }}</h4>
+<br>
+{% if user.id == post.author.user.id %}
+    <br>
+    <button> <a href="{% url 'post_update' post.id %}">Редактировать объявление</a> </button>
+    <br>
+    <button> <a href="{% url 'post_delete' post.id %}">Удалить объявление</a> </button>
+{% else %}
+    <button> <a href="{% url 'reply_create' post.id %}">Откликнуться</a> </button>
+{% endif %}
+
+{% endblock content %}
+

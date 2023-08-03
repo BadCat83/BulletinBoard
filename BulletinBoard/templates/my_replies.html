@@ -1,0 +1,28 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Отклики на мои объявления
+{% endblock title %}
+
+{% block content %}
+    <form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="Найти" />
+   </form>
+    {% for reply in replies %}
+<br>
+    {% if user.id == reply.post.author.user.id %}
+        <p>Отклик на объявление: <a class="nav-link" href="/post/{{reply.post.pk}}">{{ reply.post }}</a></p>
+        <p>{{ reply.date_created }}</p>
+        <p>{{ reply.text | safe }}</p>
+        <p>{{ reply.sender }}</p>
+    {% if not reply.confirmed %}
+        <button> <a href="{% url 'reply_confirm' reply.id %}">Принять</a> </button>
+    {% endif %}
+        <button> <a href="{% url 'reply_delete' reply.id %}">Удалить</a> </button>
+    {% endif %}
+<br>
+    {% empty %}
+      <p>Нет откликов.</p>
+    {% endfor %}
+{% endblock content %}
