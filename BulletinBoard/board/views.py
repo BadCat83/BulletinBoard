@@ -43,16 +43,6 @@ class PostCreate(LoginRequiredMixin, CreateView):
         post.author = Author.objects.filter(user__pk=self.request.user.pk)[0]
         print(User.objects.filter(pk=self.request.user.pk)[0])
         return super().form_valid(form)
-        # form.save(commit=False)
-        # user = self.request.user
-        # try:
-        #     author = Author.objects.get(user=user)
-        # except Author.DoesNotExist:
-        #     author = Author.objects.create(user=user)
-        # post = form.save(commit=False)
-        # post.author = author
-        # post.save()
-        # return super().form_valid(form)
 
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
@@ -72,8 +62,6 @@ class ReplyCreate(LoginRequiredMixin, CreateView):
     model = Reply
     template_name = 'reply_create.html'
 
-    # # сделать проверку на то, является ли тот, кто откликается автором этого поста
-    # # если да, то кнопка не должна будет показаться
     def get_context_data(self, **kwargs):
         context = super().get_context_data(*kwargs)
         pk = self.request.path.split('/')[-3]
@@ -93,7 +81,6 @@ class ReplyCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        # таким образом отправляет на страницу с объявлением, по которому составлялся отклик
         url = '/post/'.join(self.request.path.split('/')[0:-2])
         return url
 
@@ -119,7 +106,6 @@ class Replies(ListView, LoginRequiredMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filterset'] = self.filterset
-        # context['user'] = self.filterset.qs.filter(post__author_id=self.request.user.id)
         return context
 
 

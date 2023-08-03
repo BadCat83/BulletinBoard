@@ -11,30 +11,6 @@ class Author(models.Model):
         return self.user.username
 
 
-# # Танки, Хилы, ДД, Торговцы, Гилдмастеры, Квестгиверы, Кузнецы, Кожевники, Зельевары, Мастера заклинаний
-# # потом разобрать этот бардак
-# tank = 'Танк'
-# healer = 'Хил'
-# damager = 'ДД'
-# guild_master = 'Гилдмастер'
-# quest_giver = 'Квестгивер'
-# smith = 'Кузнец'
-# tanner = 'Кожевник'
-# potion_maker = 'Зельевар'
-# spell_master = 'Мастер заклинаний'
-
-# CATEGORIES = [
-#     (tank, 'Танк'),
-#     (healer, 'Хил'),
-#     (damager, 'ДД'),
-#     (guild_master, 'Гилдмастер'),
-#     (quest_giver, 'Квестгивер'),
-#     (smith, 'Кузнец'),
-#     (tanner, 'Кожевник'),
-#     (potion_maker, 'Зельевар'),
-#     (spell_master, 'Мастер заклинаний'),
-# ]
-
 class Categories(models.Model):
     name = models.CharField(max_length=50)
 
@@ -64,7 +40,6 @@ class Reply(models.Model):
     confirmed = models.BooleanField(default=False)
 
 
-# это нужно для новостей, но возможно можно будет убрать и как-то по-другому реализовать рассылку новостей
 class News(models.Model):
     title = models.CharField(max_length=100, default="Default value")
     text = models.TextField()
